@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { navItems } from "@/lib/site-content";
 
@@ -42,14 +41,14 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`fixed left-0 top-0 z-50 w-full bg-[var(--portfolio-bg)] px-[6%] py-5 transition lg:px-[9%] ${
+      className={`fixed left-0 top-0 z-50 w-full bg-(--portfolio-bg) px-[6%] py-5 transition lg:px-[9%] ${
         isSticky ? "border-b border-black/20 shadow-lg shadow-black/10" : ""
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between">
         <Link
           href="#home"
-          className="text-3xl font-extrabold text-white transition hover:text-[var(--portfolio-accent)] sm:text-5xl"
+          className="text-3xl font-extrabold text-white transition hover:text-(--portfolio-accent) sm:text-5xl"
           onClick={() => setMenuOpen(false)}
         >
           Portfolio
@@ -57,16 +56,20 @@ export function SiteHeader() {
 
         <button
           type="button"
-          className="inline-flex size-11 items-center justify-center text-white transition hover:text-[var(--portfolio-accent)] md:hidden"
+          className="inline-flex size-11 items-center justify-center text-white transition hover:text-(--portfolio-accent) md:hidden"
           aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((open) => !open)}
         >
-          {menuOpen ? <X size={34} /> : <Menu size={34} />}
+          {menuOpen ? (
+            <i className="fi fi-rr-cross text-2xl flex items-center justify-center" />
+          ) : (
+            <i className="fi fi-rr-menu-burger text-2xl flex items-center justify-center" />
+          )}
         </button>
 
         <nav
-          className={`absolute left-0 top-full w-full bg-[var(--portfolio-bg)] px-[6%] py-4 shadow-xl shadow-black/20 md:static md:block md:w-auto md:bg-transparent md:p-0 md:shadow-none ${
+          className={`absolute left-0 top-full w-full bg-(--portfolio-bg) px-[6%] py-4 shadow-xl shadow-black/20 md:static md:block md:w-auto md:bg-transparent md:p-0 md:shadow-none ${
             menuOpen ? "block" : "hidden"
           }`}
         >
@@ -80,8 +83,8 @@ export function SiteHeader() {
                   href={item.href}
                   className={`text-xl font-bold transition md:text-base ${
                     activeSection === id
-                      ? "text-[var(--portfolio-accent)]"
-                      : "text-white hover:text-[var(--portfolio-accent)]"
+                      ? "text-(--portfolio-accent)"
+                      : "text-white hover:text-(--portfolio-accent)"
                   }`}
                   onClick={() => setMenuOpen(false)}
                 >

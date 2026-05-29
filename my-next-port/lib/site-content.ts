@@ -6,13 +6,13 @@ export type NavItem = {
 export type SocialLink = {
   label: string;
   href: string;
-  icon: "users" | "camera" | "music";
+  icon: "facebook" | "instagram" | "tiktok" | "github";
 };
 
 export type Service = {
   title: string;
   description: string;
-  icon: "code" | "palette" | "smartphone";
+  icon: "code" | "palette" | "android";
 };
 
 export type Project = {
@@ -40,17 +40,22 @@ export const socialLinks: SocialLink[] = [
   {
     label: "Facebook",
     href: "https://www.facebook.com/profile.php?id=100013137529107",
-    icon: "users",
+    icon: "facebook",
   },
   {
     label: "Instagram",
     href: "https://www.instagram.com/pond_blsb/",
-    icon: "camera",
+    icon: "instagram",
   },
   {
     label: "TikTok",
-    href: "https://www.tiktok.com/@pondinho?_t=8mEWyeAi6i7&_r=1",
-    icon: "music",
+    href: "https://www.tiktok.com/@gruufootball",
+    icon: "tiktok",
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/Phurinho",
+    icon: "github",
   },
 ];
 
@@ -68,34 +73,34 @@ export const services: Service[] = [
   {
     title: "App Development",
     description: "Java, Android, iOS, and Windows phone application concepts.",
-    icon: "smartphone",
+    icon: "android",
   },
 ];
 
 export const projects: Project[] = [
   {
-    title: "UX Design",
-    description: "Coffee Cup",
-    image: "/images/coffee.jpg",
-    href: "#portfolio",
+    title: "Theptud Der Restaurant",
+    description: "Restaurant web application",
+    image: "https://api.microlink.io?url=https%3A%2F%2Frestuarant-tep.vercel.app%2F&screenshot=true&embed=screenshot.url",
+    href: "https://restuarant-tep.vercel.app/",
   },
   {
-    title: "Web Design",
-    description: "Portfolio visual concept",
-    image: "/images/project-2.jpg",
-    href: "#portfolio",
+    title: "Fresh Flowers",
+    description: "E-commerce flower shop",
+    image: "https://api.microlink.io?url=https%3A%2F%2Fe-comerce-flower.vercel.app%2F&screenshot=true&embed=screenshot.url",
+    href: "https://e-comerce-flower.vercel.app/",
   },
   {
-    title: "Web Design",
-    description: "Responsive interface study",
-    image: "/images/project-3.jpg",
-    href: "#portfolio",
+    title: "Exam Bank System",
+    description: "Exam question bank application",
+    image: "https://api.microlink.io?url=https%3A%2F%2Fexam-bank-system-2025.vercel.app%2F&screenshot=true&embed=screenshot.url",
+    href: "https://exam-bank-system-2025.vercel.app/",
   },
   {
-    title: "Web Design",
-    description: "Creative landing page layout",
-    image: "/images/project-4.jpg",
-    href: "#portfolio",
+    title: "iWarp HR Management",
+    description: "Human resource management dashboard",
+    image: "https://api.microlink.io?url=https%3A%2F%2Fiwarp-demo-v1-0-0.vercel.app%2F&screenshot=true&embed=screenshot.url",
+    href: "https://iwarp-demo-v1-0-0.vercel.app/",
   },
   {
     title: "Web Design",

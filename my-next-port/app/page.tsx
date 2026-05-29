@@ -8,7 +8,7 @@ import { ServicesSection } from "@/components/sections/services-section";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[var(--portfolio-bg)] text-white">
+    <div className="min-h-screen bg-(--portfolio-bg) text-white">
       <SiteHeader />
       <main>
         <HeroSection />
