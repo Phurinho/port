@@ -23,7 +23,7 @@ export function AboutSection() {
         <SectionHeading align="left">
           ABOUT <span className="text-[var(--portfolio-accent)]">ME</span>
         </SectionHeading>
-        <h3 className="mt-4 text-3xl font-bold text-white">Frontend Developer</h3>
+        <h3 className="mt-4 text-3xl font-bold text-white">Full Stack Developer</h3>
         <p className="my-7 text-lg leading-8 text-white/90">
           My name is Phurin Toomkul, nickname Pangpond. I&apos;m from Phayao,
           Thailand, and I&apos;m currently living in Phitsanulok while studying
@@ -31,7 +31,6 @@ export function AboutSection() {
           full-stack developer, and this portfolio is a place to introduce my
           work, personality, and growth as a developer.
         </p>
-        <UiButton href="#home">Read More</UiButton>
       </RevealOnScroll>
     </section>
   );

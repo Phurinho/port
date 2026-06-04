@@ -15,7 +15,7 @@ const techStack: { name: string; url: string; icon: string; invert?: boolean; gl
   { name: "PHP",url:"https://www.php.net/",icon:"https://thesvg.org/icons/php/default.svg"},
   { name: "Ruby",url:"https://www.ruby-lang.org/en/",icon:"https://thesvg.org/icons/ruby/default.svg"},
   { name: "Golang", url: "https://go.dev/", icon: "https://thesvg.org/icons/go/default.svg" },
-  { name: "HTML5", url: "https://developer.mozilla.org/en-US/docs/Glossary/HTML5", icon: "https://thesvg.org/icons/html5/default.svg" },
+  { name: "HTML5", url: "https://developer.mozilla.org/en-US/docs/Glossary/HTML5", icon: "https://thesvg.org/icons/html5/default.svg",scale:0.85 },
   { name: "CSS3", url: "https://www.w3.org/TR/CSS/#css", icon: "https://thesvg.org/icons/css3/default.svg" },
   { name: "SQL", url: "https://en.wikipedia.org/wiki/SQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
   { name: "Dart", url: "https://dart.dev/", icon: "https://thesvg.org/icons/dart/default.svg" },
@@ -182,6 +182,12 @@ const techStack: { name: string; url: string; icon: string; invert?: boolean; gl
 export function TechMarquee() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+  const [hasDragged, setHasDragged] = useState(false);
+  const dragThreshold = 5;
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;
@@ -195,7 +201,7 @@ export function TechMarquee() {
       const delta = Math.min((time - lastTime) / 16.666, 3); // cap delta to avoid massive jumps on tab focus change
       lastTime = time;
 
-      if (!isHovered) {
+      if (!isHovered && !isDragging.current) {
         scrollContainer.scrollLeft += 0.8 * delta;
 
         // Loop seamlessly when half of the scrollWidth is reached
@@ -218,17 +224,82 @@ export function TechMarquee() {
     }
   };
 
+  const checkWrap = (container: HTMLDivElement) => {
+    const half = container.scrollWidth / 2;
+    if (container.scrollLeft >= half) {
+      container.scrollLeft -= half;
+      scrollLeft.current -= half;
+    } else if (container.scrollLeft <= 0) {
+      container.scrollLeft += half;
+      scrollLeft.current += half;
+    }
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    const container = scrollRef.current;
+    if (!container) return;
+    isDragging.current = true;
+    setHasDragged(false);
+    startX.current = e.pageX - container.offsetLeft;
+    scrollLeft.current = container.scrollLeft;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const container = scrollRef.current;
+    if (!isDragging.current || !container) return;
+    e.preventDefault();
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startX.current) * 1.5;
+    if (Math.abs(x - startX.current) > dragThreshold) {
+      setHasDragged(true);
+    }
+    container.scrollLeft = scrollLeft.current - walk;
+    checkWrap(container);
+  };
+
+  const handleMouseUpOrLeave = () => {
+    isDragging.current = false;
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const container = scrollRef.current;
+    if (!container) return;
+    isDragging.current = true;
+    setHasDragged(false);
+    startX.current = e.touches[0].pageX - container.offsetLeft;
+    scrollLeft.current = container.scrollLeft;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const container = scrollRef.current;
+    if (!isDragging.current || !container) return;
+    const x = e.touches[0].pageX - container.offsetLeft;
+    const walk = (x - startX.current) * 1.5;
+    if (Math.abs(x - startX.current) > dragThreshold) {
+      setHasDragged(true);
+    }
+    container.scrollLeft = scrollLeft.current - walk;
+    checkWrap(container);
+  };
+
   return (
     <RevealOnScroll className="w-full animate-[fadeIn_1s_ease-out]" delay="medium">
       <div 
-        className="group relative w-full overflow-hidden py-8 px-[6%] lg:px-[9%]"
+        className="group relative w-full overflow-hidden py-8 px-0"
         onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseLeave={() => {
+          setIsHovered(false);
+          handleMouseUpOrLeave();
+        }}
       >
+        {/* Left/Right Edge Fades for Rich Aesthetic Glass/Gradient Look */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-28 md:w-40 bg-gradient-to-r from-(--portfolio-bg) to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-28 md:w-40 bg-gradient-to-l from-(--portfolio-bg) to-transparent z-10" />
+
         {/* Left Scroll Button */}
         <button
           onClick={() => handleScroll("left")}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 size-11 rounded-full bg-black/60 border border-white/10 hover:border-(--portfolio-accent)/50 text-white hover:text-(--portfolio-panel) hover:bg-(--portfolio-accent) flex items-center justify-center transition shadow-lg opacity-0 group-hover:opacity-100 cursor-pointer"
+          className="absolute left-6 top-1/2 -translate-y-1/2 z-20 size-11 rounded-full bg-black/60 border border-white/10 hover:border-(--portfolio-accent)/50 text-white hover:text-(--portfolio-panel) hover:bg-(--portfolio-accent) flex items-center justify-center transition shadow-lg opacity-0 group-hover:opacity-100 cursor-pointer"
           title="Scroll Left"
         >
           <i className="fi fi-rr-angle-left text-lg flex items-center justify-center" />
@@ -237,7 +308,7 @@ export function TechMarquee() {
         {/* Right Scroll Button */}
         <button
           onClick={() => handleScroll("right")}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 size-11 rounded-full bg-black/60 border border-white/10 hover:border-(--portfolio-accent)/50 text-white hover:text-(--portfolio-panel) hover:bg-(--portfolio-accent) flex items-center justify-center transition shadow-lg opacity-0 group-hover:opacity-100 cursor-pointer"
+          className="absolute right-6 top-1/2 -translate-y-1/2 z-20 size-11 rounded-full bg-black/60 border border-white/10 hover:border-(--portfolio-accent)/50 text-white hover:text-(--portfolio-panel) hover:bg-(--portfolio-accent) flex items-center justify-center transition shadow-lg opacity-0 group-hover:opacity-100 cursor-pointer"
           title="Scroll Right"
         >
           <i className="fi fi-rr-angle-right text-lg flex items-center justify-center" />
@@ -246,8 +317,14 @@ export function TechMarquee() {
         {/* Scrolling Viewport */}
         <div 
           ref={scrollRef}
-          className="w-full overflow-x-auto whitespace-nowrap scroll-smooth flex gap-5 select-none scrollbar-none"
+          className="w-full overflow-x-auto whitespace-nowrap scroll-smooth flex gap-5 select-none scrollbar-none cursor-grab active:cursor-grabbing py-2 px-10"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUpOrLeave}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleMouseUpOrLeave}
         >
           {/* First render of tech stack */}
           {techStack.map((tech, idx) => (
@@ -257,13 +334,18 @@ export function TechMarquee() {
               target="_blank"
               rel="noreferrer"
               title={tech.name}
-              className="group relative flex size-12 shrink-0 items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:border-(--portfolio-accent)/50 hover:bg-white/10 transition duration-300 transform hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(89,178,244,0.15)]"
+              onClick={(e) => {
+                if (hasDragged) {
+                  e.preventDefault();
+                }
+              }}
+              className="group relative flex size-16 shrink-0 items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:border-(--portfolio-accent)/50 hover:bg-white/10 transition duration-300 transform hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(89,178,244,0.15)]"
             >
               <img
                 src={tech.icon}
                 alt={tech.name}
-                width={tech.scale ? 32 * tech.scale : 32}
-                height={tech.scale ? 32 * tech.scale : 32}
+                width={tech.scale ? 44 * tech.scale : 44}
+                height={tech.scale ? 44 * tech.scale : 44}
                 style={tech.glow ? { filter: "drop-shadow(0 0 5px rgba(255, 255, 255, 0.6)) brightness(1.1)" } : undefined}
                 className={`transition duration-300 group-hover:scale-110 filter group-hover:brightness-110${
                   tech.invert ? " invert brightness-200" : ""
@@ -282,13 +364,18 @@ export function TechMarquee() {
               target="_blank"
               rel="noreferrer"
               title={tech.name}
-              className="group relative flex size-12 shrink-0 items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:border-(--portfolio-accent)/50 hover:bg-white/10 transition duration-300 transform hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(89,178,244,0.15)]"
+              onClick={(e) => {
+                if (hasDragged) {
+                  e.preventDefault();
+                }
+              }}
+              className="group relative flex size-16 shrink-0 items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:border-(--portfolio-accent)/50 hover:bg-white/10 transition duration-300 transform hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(89,178,244,0.15)]"
             >
               <img
                 src={tech.icon}
                 alt={tech.name}
-                width={tech.scale ? 32 * tech.scale : 32}
-                height={tech.scale ? 32 * tech.scale : 32}
+                width={tech.scale ? 44 * tech.scale : 44}
+                height={tech.scale ? 44 * tech.scale : 44}
                 style={tech.glow ? { filter: "drop-shadow(0 0 5px rgba(255, 255, 255, 0.6)) brightness(1.1)" } : undefined}
                 className={`transition duration-300 group-hover:scale-110 filter group-hover:brightness-110${
                   tech.invert ? " invert brightness-200" : ""

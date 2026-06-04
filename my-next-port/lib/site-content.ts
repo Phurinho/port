@@ -62,19 +62,20 @@ export const socialLinks: SocialLink[] = [
 export const services: Service[] = [
   {
     title: "Web Development",
-    description: "HTML5, CSS, JavaScript, Tailwind CSS, and Bootstrap 5.",
+    description: "React, Next.js, Node.js, TypeScript, Tailwind ",
     icon: "code",
   },
   {
     title: "UX/UI Design",
-    description: "Interface design using Figma and Adobe XD.",
+    description: "Interface design using Figma, Adobe XD ",
     icon: "palette",
   },
   {
     title: "App Development",
-    description: "Java, Android, iOS, and Windows phone application concepts.",
+    description: "Using Java, Android, iOS application concepts.",
     icon: "android",
   },
+  
 ];
 
 export const projects: Project[] = [
