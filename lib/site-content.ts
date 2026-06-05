@@ -82,25 +82,25 @@ export const projects: Project[] = [
   {
     title: "Theptud Der Restaurant",
     description: "Restaurant web application",
-    image: "https://api.microlink.io?url=https%3A%2F%2Frestuarant-tep.vercel.app%2F&screenshot=true&embed=screenshot.url",
+    image: "/images/restaurant.png",
     href: "https://restuarant-tep.vercel.app/",
   },
   {
     title: "Fresh Flowers",
     description: "E-commerce flower shop",
-    image: "https://api.microlink.io?url=https%3A%2F%2Fe-comerce-flower.vercel.app%2F&screenshot=true&embed=screenshot.url",
+    image: "/images/flower.png",
     href: "https://e-comerce-flower.vercel.app/",
   },
   {
     title: "Exam Bank System",
     description: "Exam question bank application",
-    image: "https://api.microlink.io?url=https%3A%2F%2Fexam-bank-system-2025.vercel.app%2F&screenshot=true&embed=screenshot.url",
+    image: "/images/Exambank.png",
     href: "https://exam-bank-system-2025.vercel.app/",
   },
   {
     title: "iWarp HR Management",
     description: "Human resource management dashboard",
-    image: "https://api.microlink.io?url=https%3A%2F%2Fiwarp-demo-v1-0-0.vercel.app%2F&screenshot=true&embed=screenshot.url",
+    image: "/images/iwarp.png",
     href: "https://iwarp-demo-v1-0-0.vercel.app/",
   },
   {
