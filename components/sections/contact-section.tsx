@@ -9,7 +9,7 @@ export function ContactSection() {
     >
       <RevealOnScroll>
         <SectionHeading>
-          Contact <span className="text-[var(--portfolio-accent)]">Me</span>
+          Contact <span className="text-(--portfolio-accent)">Me</span>
         </SectionHeading>
       </RevealOnScroll>
 
@@ -23,25 +23,25 @@ export function ContactSection() {
               type="text"
               placeholder="Fullname"
               aria-label="Fullname"
-              className="w-full rounded-lg bg-[var(--portfolio-panel)] p-4 text-lg text-white outline-none placeholder:text-white/60 focus:ring-2 focus:ring-[var(--portfolio-accent)]"
+              className="w-full rounded-lg bg-(--portfolio-panel) p-4 text-lg text-white outline-none placeholder:text-white/60 focus:ring-2 focus:ring-(--portfolio-accent)"
             />
             <input
               type="email"
               placeholder="Email Address"
               aria-label="Email Address"
-              className="w-full rounded-lg bg-[var(--portfolio-panel)] p-4 text-lg text-white outline-none placeholder:text-white/60 focus:ring-2 focus:ring-[var(--portfolio-accent)]"
+              className="w-full rounded-lg bg-(--portfolio-panel) p-4 text-lg text-white outline-none placeholder:text-white/60 focus:ring-2 focus:ring-(--portfolio-accent)"
             />
             <input
               type="number"
               placeholder="Mobile Number"
               aria-label="Mobile Number"
-              className="w-full rounded-lg bg-[var(--portfolio-panel)] p-4 text-lg text-white outline-none placeholder:text-white/60 focus:ring-2 focus:ring-[var(--portfolio-accent)]"
+              className="w-full rounded-lg bg-(--portfolio-panel) p-4 text-lg text-white outline-none placeholder:text-white/60 focus:ring-2 focus:ring-(--portfolio-accent)"
             />
             <input
               type="text"
               placeholder="Email Subject"
               aria-label="Email Subject"
-              className="w-full rounded-lg bg-[var(--portfolio-panel)] p-4 text-lg text-white outline-none placeholder:text-white/60 focus:ring-2 focus:ring-[var(--portfolio-accent)]"
+              className="w-full rounded-lg bg-(--portfolio-panel) p-4 text-lg text-white outline-none placeholder:text-white/60 focus:ring-2 focus:ring-(--portfolio-accent)"
             />
           </div>
           <textarea
@@ -49,11 +49,11 @@ export function ContactSection() {
             rows={10}
             placeholder="Your Message"
             aria-label="Your Message"
-            className="mt-4 w-full resize-none rounded-lg bg-[var(--portfolio-panel)] p-4 text-lg text-white outline-none placeholder:text-white/60 focus:ring-2 focus:ring-[var(--portfolio-accent)]"
+            className="mt-4 w-full resize-none rounded-lg bg-(--portfolio-panel) p-4 text-lg text-white outline-none placeholder:text-white/60 focus:ring-2 focus:ring-(--portfolio-accent)"
           />
           <button
             type="submit"
-            className="mt-8 inline-flex cursor-pointer rounded-full bg-[var(--portfolio-accent)] px-7 py-3 text-base font-bold tracking-wide text-[var(--portfolio-bg)] shadow-[0_0_1rem_var(--portfolio-accent)] transition hover:shadow-none"
+            className="mt-8 inline-flex cursor-pointer rounded-full bg-(--portfolio-accent) px-7 py-3 text-base font-bold tracking-wide text-(--portfolio-bg) shadow-[0_0_1rem_var(--portfolio-accent)] transition hover:shadow-none"
           >
             Send Message
           </button>
