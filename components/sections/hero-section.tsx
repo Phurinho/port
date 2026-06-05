@@ -105,12 +105,12 @@ export function HeroSection() {
 
         <RevealOnScroll className="order-1 md:order-2 flex justify-center md:flex-initial" delay="short">
           <Image
-            src="/images/hero-profile.png"
+            src="/images/profiefirst.png"
             alt="Phurin Toomkul portrait"
             width={560}
             height={560}
             priority
-            className="w-[82vw] max-w-sm animate-[floatImage_4s_ease-in-out_infinite] object-contain md:w-[32vw] md:max-w-lg"
+            className="w-[82vw] max-w-sm animate-[floatImage_4s_ease-in-out_infinite] object-cover aspect-square rounded-full border-4 border-(--portfolio-accent) shadow-[0_0_2rem_var(--portfolio-bg)] md:w-[32vw] md:max-w-lg"
           />
         </RevealOnScroll>
       </div>

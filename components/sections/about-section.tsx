@@ -11,11 +11,11 @@ export function AboutSection() {
     >
       <RevealOnScroll className="md:w-5/12">
         <Image
-          src="/images/about-profile.png"
+          src="/images/profiesecond.png"
           alt="Phurin profile illustration"
           width={520}
           height={520}
-          className="w-full max-w-md object-contain"
+          className="w-full max-w-md object-cover aspect-square rounded-full border-4 border-[var(--portfolio-accent)] shadow-[0_0_2rem_var(--portfolio-bg)]"
         />
       </RevealOnScroll>
 
